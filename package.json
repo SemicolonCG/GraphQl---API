@@ -2,18 +2,21 @@
   "name": "graphql---api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon ./src/index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^3.12.0",
+    "awesome-typescript-loader": "^5.2.1",
     "graphql": "^16.6.0",
     "mongoose": "^7.0.3",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "source-map-loader": "^4.0.1",
+    "typescript": "^5.0.2"
   }
 }
