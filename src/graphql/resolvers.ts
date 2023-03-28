@@ -1,38 +1,78 @@
-const Recipe = require('../models/Recipe')
+const Fruit = require('../models/Fruit')
 
 module.exports = {
     Query: {
-        async recipe(_, { ID }) {
-            return await Recipe.findById(ID)
-        },
-        async getRecipe(_, { amount }) {
-            return await Recipe.find().sort({ createdAt: -1 }).limit(amount)
+        async findFruit(_, { name }) {
+            return await Fruit.findOne({ name: name })
         }
+        
     },
     Mutation: {
-        async createRecipe(_, { recipeInput: { name, description } }) {
-            const createdRecipe = new Recipe({
+        async storeFruitToFruitStorage(_, { name, amount } ) {
+            const storeFruit= new Fruit({
                 name: name,
-                description: description,
+                amount: amount,
                 createdAt: new Date().toISOString(),
-                thumbsUp: 0,
-                thumbsDown: 0
             })
 
-            const res = await createdRecipe.save()
+            const res = await storeFruit.save()
 
             return {
                 id: res.id,
                 ...res._doc
             }
         },
-        async deleteRecipe(_, { ID }) {
-            const wasDeleted = (await Recipe.deleteOne({ _id: ID })).deletedCount
-            return wasDeleted
+        async removeFruitFromFruitStorage(_,{name ,amount}){
+            const storeFruit= new Fruit({
+                name: name,
+                amount: amount,
+                updatedAt: new Date().toISOString(),
+            })
+            const res = await storeFruit.save()
+
+            return {
+                id: res.id,
+                ...res._doc
+            }
         },
-        async editRecipe(_, { ID, recipeInput: { name, description } }) {
-            const wasEdited = (await Recipe.updateOne({ _id: ID }, { name: name, description: description })).modifiedCount
+        async createFruitForFruitStorage(_ , {name ,description ,limit}){
+
+            const storeFruit= new Fruit({
+                name: name,
+                description: description,
+                limit: limit,
+                createdAt: new Date().toISOString(),
+            })
+
+            const res = await storeFruit.save()
+
+            return {
+                id: res.id,
+                ...res._doc
+            }
+        },
+        async updateFruitForFruitStorage(_, { name, description ,limit}) {
+           
+            const wasEdited = (await Fruit.updateOne({ name: name }, { description: description ,limit: limit})).modifiedCount
             return wasEdited
-        }
+        },
+        async deleteFruitFromFruitStorage(_, { name ,forceDelete}) {
+          
+            if(forceDelete == true){
+                const wasDeleted = (await Fruit.deleteOne({ name: name })).deletedCount
+                return wasDeleted
+            }
+            return false;
+        },
+        
+       
+        
+
+      
+       
     }
 }
+
+async function findFruitById(ID: string):Promise<any>{
+    return await Fruit.findById(ID)
+  }
