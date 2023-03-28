@@ -1,4 +1,4 @@
-const {model ,schema, Schema } = require('mongoose');
+const { model, Schema } = require('mongoose')
 
 const recipeSchema = new Schema({
     name: String,
@@ -6,6 +6,6 @@ const recipeSchema = new Schema({
     createdAt: String,
     thumbsUp: Number,
     thumbsDown: Number
-});
+})
 
-model.exports = model('Recipe' , recipeSchema);
+module.exports = model('Recipe', recipeSchema)

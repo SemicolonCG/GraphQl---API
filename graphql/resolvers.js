@@ -1,38 +1,38 @@
-const Recipe = require('../models/Recipe');
+const Recipe = require('../models/Recipe')
 
-module.export = {
+module.exports = {
     Query: {
-        async recipe(_,{ID}){
+        async recipe(_, { ID }) {
             return await Recipe.findById(ID)
         },
-        async getRecipe(_,{amount}){
-            return await Recipe.find().sort({createdAt: -1}).limit(amount)
+        async getRecipe(_, { amount }) {
+            return await Recipe.find().sort({ createdAt: -1 }).limit(amount)
         }
     },
     Mutation: {
-        async createRecipe(_, {recipeInput: {name,description}}){
+        async createRecipe(_, { recipeInput: { name, description } }) {
             const createdRecipe = new Recipe({
                 name: name,
                 description: description,
                 createdAt: new Date().toISOString(),
                 thumbsUp: 0,
                 thumbsDown: 0
-            });
+            })
 
-            const res = await createdRecipe.save();
+            const res = await createdRecipe.save()
 
             return {
                 id: res.id,
-                ...res,_doc
+                ...res._doc
             }
         },
-        async deleteRecipe(_,{ID}){
-            const wasDeleted = (await Recipe.deleteOne({_id: ID})).deletedCount;
-            return wasDeleted;
+        async deleteRecipe(_, { ID }) {
+            const wasDeleted = (await Recipe.deleteOne({ _id: ID })).deletedCount
+            return wasDeleted
         },
-        async editRecipe(_,{ID ,recipeInput: {name , description}}){
-            const wasEdited = (await Recipe.updateOne({ _id: ID} , {name: name ,description: description}))
-            return wasEdited;
+        async editRecipe(_, { ID, recipeInput: { name, description } }) {
+            const wasEdited = (await Recipe.updateOne({ _id: ID }, { name: name, description: description })).modifiedCount
+            return wasEdited
         }
     }
 }

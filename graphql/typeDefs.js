@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server');
+const { gql } = require('apollo-server')
 
 module.exports = gql`
 type Recipe {
@@ -16,7 +16,7 @@ input RecipeInput {
 
 type Query {
     recipe(ID: ID!): Recipe!
-    getRecipes(amount: Int): [Recipe]
+    getRecipe(amount: Int): [Recipe]
 }
 
 type Mutation {
