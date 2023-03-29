@@ -7,7 +7,7 @@ export default class FruitManupulateService implements IManupulateFruitStorageSe
 
   public async create(name: String, description: string, limit: Number): Promise<Fruits> {
 
-    if (description.length > 500) {
+    if (description.length > 30) {
       throw new Error("Description characters must be less than 500");
     }
     const storeFruit = new Fruit({

@@ -21,21 +21,21 @@ module.exports = {
     },
     Mutation: {
         async storeFruitToFruitStorage(_, { name, amount }) {
-            return manupulateUsecase.storeFruit(_, name, amount);
+            return manupulateUsecase.storeFruit(name, amount);
         },
         async removeFruitFromFruitStorage(_, { name, amount }) {
-            return manupulateUsecase.removeFruit(_, name, amount);
+            return manupulateUsecase.removeFruit(name, amount);
         },
         async createFruitForFruitStorage(_, { name, description, limit }) {
 
-            return manupulateUsecase.createFruit(_, name, description, limit)
+            return manupulateUsecase.createFruit(name, description, limit)
         },
         async updateFruitForFruitStorage(_, { name, description, limit }) {
 
-            return manupulateUsecase.updateFruit(_, name, description, limit)
+            return manupulateUsecase.updateFruit(name, description, limit)
         },
         async deleteFruitFromFruitStorage(_, { name, forceDelete }) {
-            return manupulateUsecase.deleteFruit(_, name, forceDelete);
+            return manupulateUsecase.deleteFruit(name, forceDelete);
         },
 
     }

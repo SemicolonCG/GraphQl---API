@@ -10,20 +10,20 @@ export default class ManupulateFruitStorageUseCase implements IManupulateFruitSt
   constructor(ManupulateFruitStorageService: IManupulateFruitStorageService) {
     this.ManupulateFruitStorageService = ManupulateFruitStorageService;
   }
-  public async createFruit(_: any, name: string, description: string, limit: Number): Promise<Fruits> {
+  public async createFruit( name: string, description: string, limit: Number): Promise<Fruits> {
     let fruit = await this.ManupulateFruitStorageService.create(name, description, limit)
     return fruit;
   }
-  updateFruit(_: any, name: string, description: string, limit: Number): Promise<Boolean> {
+  updateFruit(name: string, description: string, limit: Number): Promise<Boolean> {
     throw new Error("Method not implemented.");
   }
-  storeFruit(_: any, name: string, amount: Number): Promise<Fruits> {
+  storeFruit(name: string, amount: Number): Promise<Fruits> {
     throw new Error("Method not implemented.");
   }
-  removeFruit(_: any, name: string, amount: Number): Promise<Fruits> {
+  removeFruit(name: string, amount: Number): Promise<Fruits> {
     throw new Error("Method not implemented.");
   }
-  deleteFruit(_: any, name: string, forceDelete: Boolean): Promise<Boolean> {
+  deleteFruit(name: string, forceDelete: Boolean): Promise<Boolean> {
     throw new Error("Method not implemented.");
   }
   ;
