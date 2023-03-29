@@ -17,6 +17,7 @@
     "mongoose": "^7.0.3",
     "nodemon": "^2.0.22",
     "source-map-loader": "^4.0.1",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.2",
+    "uuid": "^9.0.0"
   }
 }
