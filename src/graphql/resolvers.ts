@@ -5,11 +5,11 @@ module.exports = {
         async findFruit(_, { name }) {
             return await Fruit.findOne({ name: name })
         }
-        
+
     },
     Mutation: {
-        async storeFruitToFruitStorage(_, { name, amount } ) {
-            const storeFruit= new Fruit({
+        async storeFruitToFruitStorage(_, { name, amount }) {
+            const storeFruit = new Fruit({
                 name: name,
                 amount: amount,
                 createdAt: new Date().toISOString(),
@@ -22,8 +22,8 @@ module.exports = {
                 ...res._doc
             }
         },
-        async removeFruitFromFruitStorage(_,{name ,amount}){
-            const storeFruit= new Fruit({
+        async removeFruitFromFruitStorage(_, { name, amount }) {
+            const storeFruit = new Fruit({
                 name: name,
                 amount: amount,
                 updatedAt: new Date().toISOString(),
@@ -35,9 +35,9 @@ module.exports = {
                 ...res._doc
             }
         },
-        async createFruitForFruitStorage(_ , {name ,description ,limit}){
+        async createFruitForFruitStorage(_, { name, description, limit }) {
 
-            const storeFruit= new Fruit({
+            const storeFruit = new Fruit({
                 name: name,
                 description: description,
                 limit: limit,
@@ -51,28 +51,28 @@ module.exports = {
                 ...res._doc
             }
         },
-        async updateFruitForFruitStorage(_, { name, description ,limit}) {
-           
-            const wasEdited = (await Fruit.updateOne({ name: name }, { description: description ,limit: limit})).modifiedCount
+        async updateFruitForFruitStorage(_, { name, description, limit }) {
+
+            const wasEdited = (await Fruit.updateOne({ name: name }, { description: description, limit: limit })).modifiedCount
             return wasEdited
         },
-        async deleteFruitFromFruitStorage(_, { name ,forceDelete}) {
-          
-            if(forceDelete == true){
+        async deleteFruitFromFruitStorage(_, { name, forceDelete }) {
+
+            if (forceDelete == true) {
                 const wasDeleted = (await Fruit.deleteOne({ name: name })).deletedCount
                 return wasDeleted
             }
             return false;
         },
-        
-       
-        
 
-      
-       
+
+
+
+
+
     }
 }
 
-async function findFruitById(ID: string):Promise<any>{
+async function findFruitById(ID: string): Promise<any> {
     return await Fruit.findById(ID)
-  }
+}
