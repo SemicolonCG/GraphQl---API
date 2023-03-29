@@ -21,31 +21,10 @@ module.exports = {
     },
     Mutation: {
         async storeFruitToFruitStorage(_, { name, amount }) {
-            const storeFruit = new Fruit({
-                name: name,
-                amount: amount,
-                createdAt: new Date().toISOString(),
-            });
-
-            const res = await storeFruit.save();
-
-            return {
-                id: res.id,
-                ...res._doc
-            };
+            return manupulateUsecase.storeFruit(_, name, amount);
         },
         async removeFruitFromFruitStorage(_, { name, amount }) {
-            const storeFruit = new Fruit({
-                name: name,
-                amount: amount,
-                updatedAt: new Date().toISOString(),
-            });
-            const res = await storeFruit.save();
-
-            return {
-                id: res.id,
-                ...res._doc
-            };
+            return manupulateUsecase.removeFruit(_, name, amount);
         },
         async createFruitForFruitStorage(_, { name, description, limit }) {
 
@@ -53,22 +32,11 @@ module.exports = {
         },
         async updateFruitForFruitStorage(_, { name, description, limit }) {
 
-            const wasEdited = (await Fruit.updateOne({ name: name }, { description: description, limit: limit })).modifiedCount;
-            return wasEdited;
+            return manupulateUsecase.updateFruit(_, name, description, limit)
         },
         async deleteFruitFromFruitStorage(_, { name, forceDelete }) {
-
-            if (forceDelete == true) {
-                const wasDeleted = (await Fruit.deleteOne({ name: name })).deletedCount;
-                return wasDeleted;
-            }
-            return false;
+            return manupulateUsecase.deleteFruit(_, name, forceDelete);
         },
-
-
-
-
-
 
     }
 };
