@@ -8,8 +8,8 @@ const fruitSchema = new Schema({
     isActive: Boolean,
     createdAt: String,
     updatedAt: String
-    
-     
+
+
 })
 
 module.exports = model('Fruit', fruitSchema)

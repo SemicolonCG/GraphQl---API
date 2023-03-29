@@ -1,10 +1,17 @@
+import FindFruitUseCase from "../application/usecase/FindFruitUseCase";
+import FruitRepository from "../infastructure/FruitRepository";
+
 const Fruit = require('../models/Fruit')
+
+let fr = new FruitRepository();
+
+let findFruitUseCase = new FindFruitUseCase(fr);
 
 module.exports = {
     Query: {
         async findFruit(_, { name }) {
-            return await Fruit.findOne({ name: name })
-        }
+            return findFruitUseCase.findFruit(_, name);
+        },
 
     },
     Mutation: {
